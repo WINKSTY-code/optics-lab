@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E2E 自检 · AI 光学交互实验室 v2</title>
+<style>
+  :root{ --bg:#0f1420; --panel:#161d2e; --line:#2a3550; --txt:#e8edf7; --muted:#9fb0c8; --accent:#4fc3f7; --ok:#66bb6a; --bad:#ef5350; }
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Microsoft YaHei","PingFang SC",sans-serif;padding:24px;}
+  h1{font-size:20px;margin:0 0 4px;}
+  .sub{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.6;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px;line-height:1.7;font-size:14px;}
+  button{background:var(--accent);color:#06202b;border:none;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;margin-right:8px;}
+  button.sec{background:#26334d;color:#cfe0ff;}
+  code,pre{background:#0b1018;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;color:#cfe0ff;}
+  #report{margin-top:14px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;}
+  .ok{color:var(--ok);font-weight:700;} .bad{color:var(--bad);font-weight:700;}
+  iframe{width:100%;height:600px;border:1px solid var(--line);border-radius:10px;background:#fff;}
+</style>
+</head>
+<body>
+<h1>🧪 E2E 自检 · AI 光学交互实验室 v2</h1>
+<div class="sub">
+  本页对 <b>光学交互实验室_AI_v2.html</b> 做一键端到端自检：10 实验切换 / canvas 渲染 / AI 模块 / 知识库检索与兜底 / 问AI弹窗 / 学生身份 / 语音降级 / XSS 工具 / 仿真上下文注入。<br>
+  ⚠️ 请通过 <b>http://</b> 访问本页（本地双击 file:// 无法跨文件读取被测页；file:// 的被测页自身仍可正常使用）。
+</div>
+
+<div class="card">
+  <b>方式一：页面内一键自检（推荐，http 环境）</b><br><br>
+  <button id="runBtn">▶ 运行自检</button>
+  <button id="openBtn" class="sec">单独打开被测页</button>
+  <div id="report"><span style="color:var(--muted)">尚未运行。</span></div>
+  <iframe id="frame" style="display:none;"></iframe>
+</div>
+
+<div class="card">
+  <b>方式二：命令行（CI / 无人值守）</b><br>
+  在被测页所在目录执行：
+<pre>
+python -m http.server 8770
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --no-sandbox --virtual-time-budget=8000 --dump-dom "http://localhost:8770/光学交互实验室_AI_v2.html#e2e" &gt; dom.html
+</pre>
+  然后在 dom.html 中查找 <code>id="e2e-report"</code>，其 <code>data-result</code> 为 JSON：<code>{"pass":true/false,"results":[...]}</code>。
+</div>
+
+<div class="card">
+  <b>方式三：浏览器控制台</b><br>
+  在被测页按 F12 打开控制台执行：<code>JSON.stringify(window.AI.runE2E())</code>，每项 <code>ok:true</code> 即通过。
+</div>
+
+<script>
+document.getElementById('openBtn').onclick = () => window.open('../光学交互实验室_AI_v2.html');
+document.getElementById('runBtn').onclick = () => {
+  const report = document.getElementById('report');
+  report.innerHTML = '<span style="color:var(--muted)">⏳ 正在加载被测页并执行自检…（约 3 秒）</span>';
+  const frame = document.getElementById('frame');
+  frame.style.display = 'block';
+  frame.src = '../光学交互实验室_AI_v2.html#e2e';
+  const check = (tries) => {
+    try{
+      const doc = frame.contentDocument;
+      const rep = doc && doc.getElementById('e2e-report');
+      if(rep && rep.dataset.result){
+        const data = JSON.parse(rep.dataset.result);
+        let html = '<table><tr><th>检查项</th><th>结果</th><th>详情</th></tr>';
+        data.results.forEach(r=>{
+          html += '<tr><td>'+r.name+'</td><td class="'+(r.ok?'ok':'bad')+'">'+(r.ok?'✓ PASS':'✗ FAIL')+'</td><td>'+String(r.detail||'').replace(/</g,'&lt;')+'</td></tr>';
+        });
+        html += '</table>';
+        html += '<div style="margin-top:10px;font-size:16px;font-weight:700;" class="'+(data.pass?'ok':'bad')+'">总结：'+(data.pass?'✅ 全部通过':'❌ 存在失败项')+'</div>';
+        report.innerHTML = html;
+        frame.style.display = 'none';
+        return;
+      }
+    }catch(e){
+      report.innerHTML = '<span class="bad">✗ 无法读取被测页（file:// 打开本页会触发跨文件限制）。请用 http 方式：在目录执行 <code>python -m http.server 8770</code> 后访问 http://localhost:8770/tests/e2e.html</span>';
+      frame.style.display = 'none';
+      return;
+    }
+    if(tries > 0) setTimeout(()=>check(tries-1), 500);
+    else { report.innerHTML = '<span class="bad">✗ 超时：被测页未在预期时间内完成自检。请确认被测页文件存在且无 JS 错误。</span>'; frame.style.display='none'; }
+  };
+  setTimeout(()=>check(10), 1500);
+};
+</script>
+</body>
+</html>

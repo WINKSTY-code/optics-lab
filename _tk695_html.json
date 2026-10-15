@@ -1,0 +1,21 @@
+{
+  "local": "光学交互实验室_AI_v6.9.5.html",
+  "size": 6082481,
+  "confirm_key": "84d3d3935f6eea6a00065d5f36ad1964",
+  "task_id": "drivetask2_f6337b20a0c54ff79f2f43ebf863a0a3",
+  "dir_id": "EwybDtkaywAY",
+  "file_name": "光学交互实验室_AI_v6.9.5.html",
+  "ticket": {
+    "domain": "smhwb-gz-002.data-tencentsmh.com",
+    "path": "/smh2mf8nq7i9cemv/AAAAAAAAAAAAAAquGxmsFgjIGlOQUWYl84d3d3935f6eea6a00065d5f36ad1964.html",
+    "headers": {
+      "Authorization": "q-ak=AKIDa9O9jVHmCfhU6U6lZk6215yxJOCqaesL6eDNDbnk-gYknzUhJEclvlCivpRywAF6&q-header-list=host;x-cos-acl;x-cos-storage-class&q-key-time=1791513380;1791520580&q-sign-algorithm=sha1&q-sign-time=1791513380;1791520580&q-signature=1fe9d04cc1c81cf731845ef89ad34f4bbfc71228&q-url-param-list=",
+      "Cache-Control": "max-age=31104000",
+      "Content-Type": "text/html",
+      "x-cos-acl": "default",
+      "x-cos-crc32c-flag": "cosn",
+      "x-cos-security-token": "xUGBsGBq1XeezBoXokjs7xZEYlerm3xaa6a39a425837a868416c625c0a2637d6Px9gUeLRKe7nY2N7c0RmJKOxJ5FkVfkkJjmDQBtRcUFvooWPIdnrDW5z4afVGHZn1lLPY-5367dJSEZDkr0N7oDPEr4t3P5uWC6UZE5janVohCaflEhv-RLKnuiOkjeJYUfz37UgCEQ2tIjpUrJKZrjYxXloqa8CYtNj_eeIaxO7ylOLnNSSMjNRZHrqZHA3sJDRArGs55FLWpR8rrSjhaj2M5WTLTiBaIvTbnCjkdJ2p2NCHIqQBaRWBbwlLFjng8nXC8pQvLF12uhPJneXAlJzOGGD0X2otYT0phBBsMlhNPizTLwLf53yMyPuaTFCcGDM81-vg-xlM4Lf4oobuXZCUH7-mcPkDypXRlLNr1oDw1DP4SOGB1zzrzAnXOOxxATQewOgzE4d8noepw5bKoRGfxgLFMzOmK3M74JWNw4sYf7kP1GBcmDrBaCi6tnGqZtZa5N1E2IskLwjvRsEAmMwLjzFbex99Qs2cXccODPmu0U104Zv4FG0clV1VVbIx4Ko4dAk1r31lmF8RjP6HBFkpBIop9t4ehFepBhSz8P46r1h-kR96suWJ2TmtsnXdpjfyY27-GuVrXlzYmpxroUcThorb2Xe4-hnjTYhTKKbKl0zg0iA0kUqHFrT63OflocIBObOU1oYRHvwrH3ewKlKilf-PNwYmyG6MHOf3_7FPBy3WaElpyFCExlREjkZaEX3N0Azv2DeF7AluhvYWOa57qDbp-bybn07FirZeqUxq_pBP13V2iuayqUrNZl7Rc3BiiYzdlvF8BW664NCZS_GOJeEVB0kqrGMqUOR-5ZqH9MbRDDph05Kh5QCoIwRZqKm0j1mAyMlsmTBj0pc8yGLPT_ssLc8Tmu-52BSXCrIDuhSkY7Pv9P-s39_ozgnPgTRrzfuJ6fteikDxmQNCJSoEscanXz3_gz-Pmr7zY-VwTh3xNulFjZrtB6FZ02e",
+      "x-cos-storage-class": "INTELLIGENT_TIERING"
+    }
+  }
+}

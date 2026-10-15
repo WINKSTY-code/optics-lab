@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 临时校验目录
+_chk*/
+_dl*/
+_v647_scene_chk/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# 日志
+*.log
+
+# 本地密钥（AI 模型 API Key 绝不入库）
+.env
+.env.local
+secrets.json
+*_key.txt

@@ -1,0 +1,14 @@
+{
+ "url": "https://smhwb-gz-002.data-tencentsmh.com/smh2mf8nq7i9cemv/AAAAAAAAAAAAAAquGxmsFgjIGlOQUWYld0a649d0ab1fb54800065c20c9989e30.md",
+ "domain": "smhwb-gz-002.data-tencentsmh.com",
+ "path": "/smh2mf8nq7i9cemv/AAAAAAAAAAAAAAquGxmsFgjIGlOQUWYld0a649d0ab1fb54800065c20c9989e30.md",
+ "confirm_key": "d0a649d0ab1fb54800065c20c9989e30",
+ "task_id": "drivetask_3d0bebeeb1724879be3d64e6cfc0eeae",
+ "headers": {
+  "Authorization": "q-ak=AKID_Go7sel5nEM8BTTx_tuQGCvWRr48rOy3ALh6ApjFmTdZUnf3D13PRLlTvD3HWLtn&q-header-list=host;x-cos-acl;x-cos-storage-class&q-key-time=1790145751;1790152951&q-sign-algorithm=sha1&q-sign-time=1790145751;1790152951&q-signature=a663ac91a2c60471a853410bb668404a88dc2491&q-url-param-list=",
+  "Content-Type": "text/markdown",
+  "x-cos-acl": "default",
+  "x-cos-storage-class": "INTELLIGENT_TIERING",
+  "x-cos-security-token": "iBDLCckaiAXheyt1h1R250hXis34MG7aa15f0cf180caaf68d2a2ec62bedc86c3TTTbj0RIK1xIestYmOwnXNEshlsgXmzPyzU3OJXxR8GkR1szZhVgfFnVu_cnlQ90TuoEHE4j6SK2zUeJiExxlZZY2S63zJYgw4n5QqTlNsH1a_phLHi2oW3c_CiUCTeDWcU5u5b6vtb5hC_qp9rfv6rpmB_O7q3S0ceajc7fkUSH2-uHV2xVhe7Kl6qczqj8RXM-6UBtZ25_bjTVg_mICL5BzmRZVeR0GBHfp71QHCuwehLyTt3uA7Do5GqqI-eKd324G2u0UZ86pq8dC7Wpf9_I7VieE3enoecw3C54AeavtQ0q5gfdxpjseerzeI69HqRSoKd0DcETAVCgGKzAxdV0I3K3bIDT1Dlr-jPnS2kKRwJeEaVtSv6AVq0sHjZk7HC4xnHQtb8WKa7i5qLv6TNEVJtCL_6oAlpabmsZnt_Lh4SQAm-TdRf9hLJcuT7n8fwpboBdjtjLb3zi_cEMZEkZuA2qb9g7EsFZpGO0EenVUD77ghhT9q-9gc_d21u-dRDa7luYAyT1ZMLl_S2dHZIrG3f7OINomdENcaPGrOiYOBhNfQgbwy4G6yrO-xFE_0Qkb0Nl6qTh1I9-OfoiBNJ5WGhGXs0yEx6QdS7m4Gu4aCce-lRNhCe13rGji-OrO1ruZ9AEA0QpPrjSk91yZVguRotT0q58IKO7nTtNNUj4vNM2uh9CmEwZCbnhRoYmiZJVvetNgp7JDR643CLq-gjfokhFMkVQE4Mg3XIiNhaXn85Y7F1_Otsk7zQE9Z_PdQm62jsWey09l2vOyJ7bVRUWF_-DCtHkCmtbE5QeSLU7wFKN126xNvvps-2j9E12kW74oWxNWkrpRmiV9OFtEQOWiutIv8R_1kz_lbpTz-BruQpSOmiA1r46tOVrwSJmHli-Orasyrtz2R0Pw9les-mqoZ3Pcf7yp47vtSUoy1A8Yk4WCSJl8tHi9u-kw-AL"
+ }
+}

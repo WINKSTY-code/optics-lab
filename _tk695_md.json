@@ -1,0 +1,21 @@
+{
+  "local": "工作记录V6.9.5.md",
+  "size": 4317,
+  "confirm_key": "e4131ed66a70038800065d5f251d8a18",
+  "task_id": "drivetask2_74b92513d1714de497a2d0ad5f5a30ba",
+  "dir_id": "EwybDtkaywAY",
+  "file_name": "工作记录V6.9.5.md",
+  "ticket": {
+    "domain": "smhwb-gz-002.data-tencentsmh.com",
+    "path": "/smh2mf8nq7i9cemv/AAAAAAAAAAAAAAquGxmsFgjIGlOQUWYle4131ed66a70038800065d5f251d8a18.md",
+    "headers": {
+      "Authorization": "q-ak=AKIDnOxs2du--q_OgieFaMvmvrqnzbzjW8yuRuBnaWnK_PBbxby3Ekcfg4nu2S7rtFJl&q-header-list=host;x-cos-acl;x-cos-storage-class&q-key-time=1791513086;1791520286&q-sign-algorithm=sha1&q-sign-time=1791513086;1791520286&q-signature=a2806f79769246923e3c90643f63c71072e11cda&q-url-param-list=",
+      "Cache-Control": "max-age=31104000",
+      "Content-Type": "text/markdown",
+      "x-cos-acl": "default",
+      "x-cos-crc32c-flag": "cosn",
+      "x-cos-security-token": "xUGBsGBq1XeezBoXokjs7xZEYlerm3xa408c94083c0c8fc9f74f8aa4bb282160Px9gUeLRKe7nY2N7c0RmJBDtXgNAEpHIF3St_lgags-W87HCD0wSmgzSG240Njp8WkgNu9Wmb0B8Oy0gaOIW3kZ5iPbwdooTjkpgR1HYOLRE1Em6jJ95Acgi8mydNV8akfuDPiITZMqiFnARjqHCUTb3mThOWfaAoRgSr1XcWkUvgEaVgNobbxGCk-yXuAcbkitZDNKuCTxXccVI4F94YG2C2OC45zvQY3UQmHbKYj5EanNXsnfxcMDCUinoHTDbbRiEd5mnHpFWXIfBvts5HLPSKQmlRo__l4FQjl7Ilu23oamh7Nny7V_n9Y7KOgVBhxEFD8zKLO6r-mspcufzoHnck0xSSRnhTLTz4z9DSUIVdwnZ9RdOgDY8PGtFp896Tr6_YZR-YJJPRLUXQFYXCu24Cio1OCXN9C52h-PeVkCLnLQOmVeeHn_OX8C6sQmYnnC0DkhMmJhzdPQG2VRacVTcykk1fbk7ERyUz5zhXcI5z1Z2rWg_zw7vHKB-_wdYBcjmwYhtEYb75Eq3cPxhi4_AZPqDpChNOlkegG9Izmi88zqPyt-LGeJZLokm4X7jHlj9A2yGlAjATUxuTIlBJ2j6W1gxQhbM4qly5IzCKjRuz5oGY6eWoCcqP1BzK4wV9Pa6-qfls_HJ0U16wpNsLxecuoAcskv6LcqmzWhWymxNospjDluIB6cclxJlNhvAX7D-gC8C16NeSdSvOSYpYLeTKSBPwrNoRL770OpJTi95bCOy3SVtb9sSHP_3VCqd7NkIZiCzhZv82AssvCZm-OrirtwP1jlUsLMBh6a_nAg55MRqvK9pUPUqMUoiPCq99o7aYIbjCgKNMXaK0eIr2bb9z_ecK_4guoqoVh2o1PmiQlwaeFnlNiSF6cz3vmpFcfYTzTuUVFZTRX8EWVHy2fGaBVt7TVNw8rznBwW2CwPIzCCPCBgm6FB3DzZJMBqO",
+      "x-cos-storage-class": "INTELLIGENT_TIERING"
+    }
+  }
+}

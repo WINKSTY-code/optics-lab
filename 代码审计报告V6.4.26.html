@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1420">
+<title>代码审计报告 · 光学交互实验室 AI v6.4.26</title>
+<style>
+:root{
+  --bg:#0f1420; --bg2:#131926; --card:#171d2b; --card2:#1c2333;
+  --text:#e6e9f0; --muted:#9aa4b8; --muted2:#7d879b;
+  --border:#26304a; --accent:#4f8cff; --accent2:#8b7dff;
+  --danger:#ff6b6b; --warn:#f5a524; --ok:#34d399; --info:#38bdf8;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+body{
+  margin:0; padding:14px 12px 40px; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:15.5px; line-height:1.72; letter-spacing:.01em;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:760px;margin:0 auto}
+
+/* ---- hero ---- */
+.hero{
+  background:linear-gradient(150deg,#1b2540 0%,#141b2c 60%,#101725 100%);
+  border:1px solid var(--border); border-radius:16px;
+  padding:22px 18px 18px; margin-bottom:16px; position:relative; overflow:hidden;
+}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;
+  background:radial-gradient(circle,rgba(79,140,255,.28),transparent 70%);border-radius:50%}
+.hero .kicker{font-size:12px;letter-spacing:.16em;color:var(--accent);font-weight:700;text-transform:uppercase}
+.hero h1{font-size:23px;line-height:1.34;margin:8px 0 6px;font-weight:700}
+.hero .sub{color:var(--muted);font-size:13.5px;line-height:1.6}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.pill{background:rgba(79,140,255,.12);border:1px solid rgba(79,140,255,.34);color:#b9d1ff;
+  font-size:11.5px;padding:4px 9px;border-radius:999px;white-space:nowrap}
+
+/* ---- section ---- */
+.sec{margin-top:22px}
+.sec-title{font-size:18px;font-weight:700;margin:0 0 10px;
+  padding-left:11px;border-left:3px solid var(--accent);line-height:1.4}
+.sec-title .n{color:var(--accent);font-size:14px;margin-right:5px;font-weight:800}
+
+/* ---- card ---- */
+.card{background:var(--card);border:1px solid var(--border);border-radius:13px;
+  padding:13px 14px;margin-bottom:10px}
+.card h3{font-size:15.5px;margin:0 0 8px;font-weight:700;line-height:1.5}
+.card p{margin:7px 0}
+.card .lead{color:var(--muted);font-size:14px}
+
+/* ---- boxes ---- */
+.box{border-radius:11px;padding:12px 13px;margin:10px 0;font-size:14.5px;border:1px solid}
+.box .t{font-weight:700;display:block;margin-bottom:5px;font-size:14.5px}
+.danger-box{background:rgba(255,107,107,.09);border-color:rgba(255,107,107,.36)}
+.danger-box .t{color:var(--danger)}
+.warn-box{background:rgba(245,165,36,.09);border-color:rgba(245,165,36,.36)}
+.warn-box .t{color:var(--warn)}
+.good-box{background:rgba(52,211,153,.09);border-color:rgba(52,211,153,.34)}
+.good-box .t{color:var(--ok)}
+.info-box{background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.32)}
+.info-box .t{color:var(--info)}
+
+/* ---- table ---- */
+.data{overflow-x:auto;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{border:1px solid var(--border);padding:7px 8px;text-align:left;vertical-align:top;line-height:1.55}
+th{background:var(--card2);color:#c6d2ea;font-weight:700;font-size:13px;white-space:nowrap}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.t-p0{background:rgba(255,107,107,.18);color:#ff9d9d;border:1px solid rgba(255,107,107,.4)}
+.t-p1{background:rgba(245,165,36,.18);color:#ffc766;border:1px solid rgba(245,165,36,.4)}
+.t-p2{background:rgba(79,140,255,.18);color:#a9c7ff;border:1px solid rgba(79,140,255,.4)}
+.t-p3{background:rgba(125,135,155,.2);color:#b9c4d8;border:1px solid rgba(125,135,155,.4)}
+.t-ok{background:rgba(52,211,153,.18);color:#7fe7c0;border:1px solid rgba(52,211,153,.4)}
+
+/* ---- list ---- */
+ul.list{list-style:none;margin:8px 0;padding:0}
+ul.list li{position:relative;padding-left:14px;margin-bottom:7px;font-size:14.5px;line-height:1.68}
+ul.list li::before{content:"";position:absolute;left:2px;top:.68em;width:5px;height:5px;
+  border-radius:50%;background:var(--accent)}
+ul.list.ok li::before{background:var(--ok)}
+ul.list.plain li::before{background:var(--muted2)}
+
+code{background:#0a0f1a;border:1px solid #1e2740;border-radius:5px;
+  padding:1px 5px;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;color:#a8c7ff;
+  word-break:break-all}
+pre{background:#0a0f1a;border:1px solid #1e2740;border-radius:9px;padding:11px;
+  overflow-x:auto;margin:9px 0;font-size:12px;line-height:1.6;
+  font-family:ui-monospace,Consolas,monospace;color:#a8c7ff}
+pre .cm{color:#5f6f8a}
+pre .hi{color:#ff9d9d}
+
+.bar{height:9px;border-radius:5px;background:#0d1320;overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;border-radius:5px}
+.bar-row{display:flex;align-items:center;gap:9px;font-size:13px;margin-bottom:9px}
+.bar-row .lbl{width:118px;flex:0 0 118px;color:var(--muted)}
+.bar-row .bar{flex:1}
+.bar-row .val{width:66px;flex:0 0 66px;text-align:right;font-variant-numeric:tabular-nums;color:var(--text);font-weight:600;font-size:12.5px}
+
+.footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);
+  color:var(--muted2);font-size:11.5px;line-height:1.65;text-align:center}
+.sep{margin:0 6px;color:#3a4560}
+@media (max-width:420px){
+  .bar-row .lbl{width:88px;flex:0 0 88px;font-size:12px}
+  .bar-row .val{width:58px;flex:0 0 58px;font-size:12px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="kicker">Code Audit</div>
+  <h1>光学交互实验室 AI<br>v6.4.26 · 代码审计报告</h1>
+  <div class="sub">11,902 行 / 8.37 MB / 16 个脚本块 · 语法校验 16/16 通过</div>
+  <div class="pills">
+    <span class="pill">P0 × 2</span>
+    <span class="pill">P1 × 7</span>
+    <span class="pill">P2 × 5</span>
+    <span class="pill">P3 × 2</span>
+    <span class="pill">✅ 保留设计 × 10</span>
+  </div>
+</div>
+
+<!-- ===== 一 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">01</span>结论摘要</h2>
+
+  <div class="box good-box">
+    <span class="t">总体判断：工程质量在平均线以上，问题集中在「体积失控」与「复制粘贴漂移」</span>
+    有全局异常兜底、启动超时、三语 i18n、无障碍模块、iframe 渲染自愈、API Key 脱敏与退出守卫——这些是多数教学单文件作品完全没有的。主要问题不在"写得对不对"，而在<b>单文件体积失控</b>与<b>同源漂移</b>。
+  </div>
+
+  <div class="card">
+    <h3>一句话结论</h3>
+    <p>功能架构是好的。<code>v6.4.27</code> 建议只做一次<b>「消肿 + 去漂移」专项</b>：把 8.37 MB 压到 5 MB 以内、把两个 three.js 构建统一；其余按 P1 清单分批清账，<b>无需大改架构</b>。</p>
+  </div>
+
+  <div class="card">
+    <h3>审查方式与可信度</h3>
+    <ul class="list plain">
+      <li>静态结构剖析：逐块切分 16 个真实 <code>&lt;script&gt;</code> + 14 个 <code>&lt;style&gt;</code></li>
+      <li>指纹比对：对内嵌压缩库做 MD5，判定重复与版本漂移</li>
+      <li>关键面量扫描：密钥、CSP、sandbox、postMessage、innerHTML、catch 覆盖率</li>
+      <li><code>node --check</code> 逐块语法校验 → <b>16/16 通过</b>，无语法错误、无裸 <code>&lt;/script&gt;</code> 提前截断</li>
+    </ul>
+  </div>
+
+  <div class="data">
+    <table>
+      <tr><th>级别</th><th>数量</th><th>主题</th></tr>
+      <tr><td><span class="tag t-p0">P0</span></td><td class="num">2</td><td>three.js 同页混用两个构建；1.39 MB 逐字节重复</td></tr>
+      <tr><td><span class="tag t-p1">P1</span></td><td class="num">7</td><td>Key 明文存储、空 catch 静默、innerHTML 转义不彻底、E2E 钩子进生产、postMessage 源不校验、无 CSP/sandbox、监听器与 blob 泄漏</td></tr>
+      <tr><td><span class="tag t-p2">P2</span></td><td class="num">5</td><td>全局作用域名污染、console 噪音、版本注释堆积、风格断层、交付目录卫生</td></tr>
+      <tr><td><span class="tag t-p3">P3</span></td><td class="num">2</td><td>注释与实现不符、可删的兼容别名</td></tr>
+      <tr><td><span class="tag t-ok">保留</span></td><td class="num">10</td><td>见第五节，不要为了重构而重构掉</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 二 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">02</span>体积构成剖析</h2>
+  <p class="lead" style="color:var(--muted);font-size:14.5px">8.37 MB 的真实去向——这是 P0 的量化依据。</p>
+
+  <div class="card">
+    <div class="bar-row"><span class="lbl">内联音频 base64</span><span class="bar"><i style="width:100%;background:linear-gradient(90deg,#ff6b6b,#ff9d7a)"></i></span><span class="val">3.28 MB</span></div>
+    <div class="bar-row"><span class="lbl">three.js × 6 份</span><span class="bar"><i style="width:50%;background:linear-gradient(90deg,#f5a524,#ffc766)"></i></span><span class="val">1.63 MB</span></div>
+    <div class="bar-row"><span class="lbl">主程序逻辑</span><span class="bar"><i style="width:46%;background:linear-gradient(90deg,#4f8cff,#8b7dff)"></i></span><span class="val">1.50 MB</span></div>
+    <div class="bar-row"><span class="lbl">子页其余内容</span><span class="bar"><i style="width:33%;background:linear-gradient(90deg,#38bdf8,#4f8cff)"></i></span><span class="val">1.06 MB</span></div>
+    <div class="bar-row"><span class="lbl">CSS/HTML/模块</span><span class="bar"><i style="width:22%;background:linear-gradient(90deg,#7d879b,#9aa4b8)"></i></span><span class="val">0.72 MB</span></div>
+    <div class="bar-row"><span class="lbl">挑战模式</span><span class="bar"><i style="width:5%;background:#6b7a99"></i></span><span class="val">124 KB</span></div>
+    <div class="bar-row"><span class="lbl">GSAP 3.13.0</span><span class="bar"><i style="width:3%;background:#5a6a88"></i></span><span class="val">70.8 KB</span></div>
+  </div>
+
+  <div class="data">
+    <table>
+      <tr><th>动作</th><th>省下</th><th>风险</th></tr>
+      <tr><td>5 份重复 three.js 合并为共享 1 份</td><td class="num"><b>1.08 MB</b></td><td>中，需改 5 个子页加载顺序</td></tr>
+      <tr><td>音频降码率（24→16 kbps 单声道）</td><td class="num"><b>0.8–1.2 MB</b></td><td>低，人声教学足够</td></tr>
+      <tr><td>音频改按需注入</td><td class="num">首屏 −3.28 MB</td><td>中，需改 <code>_audioBlobUrl</code></td></tr>
+      <tr><td>6 个子页共用公共外壳代码</td><td class="num">0.3–0.5 MB</td><td>中</td></tr>
+    </table>
+  </div>
+
+  <div class="box info-box">
+    <span class="t">预期结果</span>
+    8.37 MB → <b>5.0 MB 左右</b>（保守），激进可到 <b>4.5 MB</b>。对"U 盘拷到教室电脑双击打开"和"手机扫码预览"这两个真实使用场景，这是最直接的体验改善。
+  </div>
+</div>
+
+<!-- ===== 三 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">03</span>P0 问题 · 建议 v6.4.27 必修</h2>
+
+  <div class="box danger-box">
+    <span class="t">P0-1 · 同一页面混用两个不同的 three.js 构建</span>
+    对 6 个内嵌子页各自抽出的压缩库做 MD5：
+    <pre>336f961d4c  277.6KB/份 ×5
+   → __ECL_HTML__ / __S3D_PINHOLE__ / __S3D_REFL__
+     __S3D_LENS__ / __S3D_MIRROR__
+<span class="hi">a688d76480  279.9KB/份 ×1</span>
+   → __S3D_SHADOW__        ← 不同的构建</pre>
+    <code>__S3D_SHADOW__</code> 中 <code>THREE</code> 标识出现 172 次，其余 5 份均为 177 次；<code>WebGLRenderer</code> 出现 36 次 vs 35 次。<b>这不是同一份文件。</b>
+  </div>
+
+  <div class="card">
+    <h3>影响</h3>
+    <ul class="list">
+      <li>五个 3D 场景（反射 / 凸透镜 / 平面镜 / 小孔 / 影子）中 4 个基于构建 A、1 个基于构建 B，行为差异不可控——<code>OrbitControls</code> 手感、色彩管理、阴影贴图默认值在不同 three.js 构建间会有可感知差别。</li>
+      <li>升级 three.js 必须改 <b>6 处</b>，且第 6 处是"另一版本"，极易漏改，形成长期漂移。</li>
+      <li>尾块注释（L11538）声称"自带的 three.js r147"，与"存在两个构建"这一事实矛盾——注释需修正，也说明版本已经脱管。</li>
+    </ul>
+    <div class="box good-box" style="margin-bottom:0">
+      <span class="t">建议</span>
+      确定唯一 three.js 构建，重新导出 6 个子页；在文件顶部加一行版本常量 <code>THREE_BUILD = 'r147'</code>，内嵌页加载后 <code>console.assert</code> 校验 <code>THREE.REVISION</code>，让漂移在测试期就暴露。
+    </div>
+  </div>
+
+  <div class="box danger-box">
+    <span class="t">P0-2 · 1.39 MB 逐字节重复</span>
+    5 份完全相同的 277.6 KB 库 = <b>1,387.8 KB</b>，占全文件 <b>16.6%</b>。<br>
+    根因：这 5 个子页是从同一模板"复制粘贴 + 局部改写"生成的（公共前缀 0%，但库部分逐字节一致）。
+  </div>
+
+  <div class="card">
+    <h3>建议（按实施成本排序）</h3>
+    <ul class="list">
+      <li><b>方案 A（推荐，改动最小）</b>：父页只保留 1 份 three.js（作为 <code>window.__THREE_SRC__</code> 字符串），子页 srcdoc 里把库源码替换为从父页 blob URL 加载——一次性改 5 处模板，省 1.08 MB。</li>
+      <li><b>方案 B</b>：音频改外部资源，接受"多文件"。<b>不推荐</b>——用户已明确要"单文件拷了就能用"。</li>
+      <li><b>方案 C</b>：接受现状，但把 three.js 抽成 <code>window.__THREE__</code> 常量集中存放。省不下体积，但能防漂移。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 四 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">04</span>P1 问题 · 建议 v6.5 清账</h2>
+
+  <div class="card">
+    <h3><span class="tag t-p1">P1-1</span> API Key 明文存 localStorage，baseUrl 无白名单</h3>
+    <p><code>ai_optics_v1_cfg</code>、<code>ai_optics_v1_judge</code> 两个键明文存 <code>apikey</code>；配置项含自定义 <code>baseUrl</code>（L8034），Key 可被发往任意地址。</p>
+    <div class="box good-box">
+      <span class="t">已有缓解（值得肯定）</span>
+      <code>escapeKey()</code> 脱敏（前 4 + 后 4）、<code>detectLocalKeys()</code> 检测、<code>armApiKeyClearOnExit()</code> 在 <code>beforeunload/pagehide</code> 挂守卫并提供"全部保留 / 仅清判卷 / 全部清除"三选项。
+    </div>
+    <p><b>残留风险</b>：同机其他进程 / 浏览器扩展 / 后续打开同一 <code>file://</code> 的页面可读走明文 Key。</p>
+    <p><b>建议</b>：① 自定义 baseUrl 旁提示"Key 将发送到该地址，请确认可信"；② 密码框加 <code>autocomplete="off"</code>；③ 长期可评估 WebCrypto 派生密钥加密（教育场景非必须）。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag t-p1">P1-2</span> 62 处空 <code>catch(e){}</code> 静默吞异常</h3>
+    <p>与"V4.9.1 可诊断"的设计目标直接冲突——真正出错时，兜底模块什么都收不到。</p>
+    <p><b>建议</b>：统一改成 <code>catch(e){ console.warn('[ctx]', e &amp;&amp; e.message); }</code>。<code>localStorage</code> 相关读写可保留静默（隐私模式），其余全部出声。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag t-p1">P1-3</span> innerHTML 转义不彻底</h3>
+    <p>102 处 <code>.innerHTML =</code>；已定位至少 1 处未走转义的拼接：</p>
+    <pre><span class="cm">// L3796</span>
+el.innerHTML = '&lt;div class="rpt-concl"&gt;' +
+  '&lt;div class="claim"&gt;' + <span class="hi">c.claim</span> + '&lt;/div&gt;' + ...</pre>
+    <p>项目已在 <b>L2958–L2968</b> 收敛出<b>全局唯一</b> <code>escHtml()</code>（注释自述"原 kmapEsc / escapeHtml / escHtml 三份重复实现已全部收敛"），但调用不彻底。</p>
+    <p><b>建议</b>：凡拼 <b>AI 返回内容 / 学生姓名 / 学号 / 用户输入问题</b> 的位置，一律过 <code>escHtml()</code>。特别复查"AI 判卷结果回显"与"错题诊断报告"两条链路。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag t-p1">P1-4</span> <code>runE2E</code> 自测钩子留在生产代码</h3>
+    <p>L5687 定义了 <code>function runE2E(...)</code>，在正式交付文件中。</p>
+    <p><b>建议</b>：迁到独立的 <code>e2e_v6426.py</code> 侧（已有此机制），生产文件里删掉；若需保留，必须由 URL 参数或 <code>localStorage</code> 开关显式启用，并确保默认不可达。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag t-p1">P1-5</span> postMessage 全用 <code>'*'</code> 目标源，接收端不校验来源</h3>
+    <p>7 处发送、6 处监听。监听端<b>只校验消息形状不校验来源</b>：</p>
+    <pre><span class="cm">// L11484 等</span>
+window.addEventListener('message', function (e) {
+  var m = e &amp;&amp; e.data;
+  if (!m || typeof m !== 'object' || typeof m.t !== 'string') return;
+  if (m.t === 's3d:param') {
+    if (typeof m.name !== 'string' || !ALLOWED.test(m.name)) return;  <span class="cm">// 白名单 ✔</span>
+    if (typeof m.value !== 'number' || !isFinite(m.value)) return;    <span class="cm">// 类型 ✔</span></pre>
+    <p>代码注释已说明取舍："离线 <code>file://</code> 下 origin 为 null，故不做 origin 校验，只严格校验消息形状"。这个理由<b>成立</b>，且白名单 + 数值校验把危害压得很低——但仍有更优解。</p>
+    <p><b>建议</b>：改为校验 <code>e.source === 目标 iframe.contentWindow</code>（父页端）或 <code>e.source === window.parent</code>（子页端）。该判据在 <code>file://</code> 下同样有效，且精确到"就是我这个对端"，比 origin 更强。当前方案属"能跑但次优"，是可修复的欠债。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag t-p1">P1-6</span> 无 CSP / 无 iframe sandbox / 外链无 SRI</h3>
+    <p><code>Content-Security-Policy</code> 0 处、<code>sandbox=</code> 0 处、<code>integrity=</code> 0 处；有 6 处外链 CDN 引用。</p>
+    <p><code>file://</code> 单文件 + 全内联的设计下，CSP 价值有限，<b>可以接受不加</b>。但 5 个 3D 子页是自己的内容，加 <code>sandbox="allow-scripts allow-same-origin"</code> 成本极低（一行），能顺手隔离子页异常。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag t-p1">P1-7</span> 监听器 137 : 0 不卸载；11 个 blob URL 永不回收</h3>
+    <ul class="list">
+      <li><code>addEventListener</code> 137 处，<code>removeEventListener</code> <b>0</b> 处，全部匿名 → 结构上无法卸载。代码里有 <code>reclaim()/remount</code> 自愈路径（L11427 等），反复挂载时缺乏对称清理手段。</li>
+      <li><code>_audioBlobUrl()</code>（L4436–L4446）创建的 blob URL 存入 <code>_audioCache</code> 后<b>永不 <code>revokeObjectURL</code></b>；11 段全播一遍常驻 ~2.4 MB blob，叠加源码里无法释放的 3.28 MB base64 字符串常量，常驻内存约 <b>5.7 MB</b>。</li>
+    </ul>
+    <p><b>建议</b>：① 长生命周期全局监听改用 <code>AbortController</code> + <code>signal</code>（现代浏览器全支持，能批量卸载）；② 页面 <code>pagehide</code> 时遍历 <code>_audioCache</code> 做一次 <code>revokeObjectURL</code>。</p>
+  </div>
+</div>
+
+<!-- ===== 五 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">05</span>已验证为良好、建议保留</h2>
+  <p style="color:var(--muted);font-size:14.5px;margin-top:0">这些是作品真正的技术亮点，<b>不要为了重构而重构掉</b>。</p>
+
+  <div class="card">
+    <ul class="list ok">
+      <li><b>V4.9.1 全局健壮性兜底</b>（L17–L184）：捕获 <code>error</code> / <code>unhandledrejection</code> + 15 秒启动超时 + 固定浮层 + 「复制错误信息」。资源类失败只记日志不弹层、启动成功后偶发异常不打断使用——分层判断很成熟。</li>
+      <li><b>切 tab 停 3D 渲染省电</b>：父页发 <code>ecl:active</code> / <code>s3d:active</code> 控制子页渲染循环启停。</li>
+      <li><b>懒挂载 srcdoc</b>：首次进入某场景才 <code>setAttribute('srcdoc')</code>，避免 6 个 WebGL 上下文同时创建。</li>
+      <li><b>iframe 渲染上下文丢失自愈</b>：<code>ecl:lost</code> → <code>reclaim()</code> → 最多重挂 2 次。</li>
+      <li><b><code>s3d:ready</code> 补发机制</b>（L11831）：解决"remount 后初始 init/active 消息发进正在重载的 iframe 而丢失"的竞态——很有经验的修法。</li>
+      <li><b>API Key 脱敏 + 退出守卫三选项</b>：见 P1-1。</li>
+      <li><b>三语 i18n 双层</b>（<code>zh</code> / <code>zht</code> / <code>en</code>）：静态 <code>data-i18n</code> 替换 + 动态 <code>T('key')</code>，且明确"教材正文与画布标注保持简体原文"——教学定位清晰。</li>
+      <li><b>全局唯一 <code>escHtml()</code></b>：已主动收敛过三份重复实现（L2958），方向正确，只是调用面没铺满（见 P1-3）。</li>
+      <li><b>实验模块 IIFE 隔离</b>：11 个模块统一 <code>MODULES.xxx = (function(){…})()</code>，只暴露 <code>setTheme</code> / <code>render</code>，<code>window</code> 上只导出 <code>AI</code> 一个。</li>
+      <li><b>版本号单一来源</b>：全文只有 <code>BUILD = 'v6.4.26'</code>（L20），未发现旧版本号残留；<code>node --check</code> 16/16 通过。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 六 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">06</span>P2 / P3 · 低成本清理</h2>
+  <div class="data">
+    <table>
+      <tr><th>级别</th><th>问题</th><th>建议</th></tr>
+      <tr><td><span class="tag t-p2">P2-1</span></td><td><b>全局作用域名污染</b>：主脚本（L2145 起）<b>没有 IIFE 包裹</b>，顶层 201 个 <code>function</code> 声明直接成为 <code>window</code> 属性（<code>T</code>/<code>E</code>/<code>render</code>/<code>play</code>/<code>stop</code>/<code>ray</code>/<code>pair</code>/<code>val</code>/<code>save</code>…）</td><td>用一层 IIFE 包住主脚本，或把工具函数挂到单一命名空间 <code>window.OPT = {}</code></td></tr>
+      <tr><td><span class="tag t-p2">P2-2</span></td><td><b>console 噪音</b>：全文件 664 处 <code>console.*</code>，其中应用层 <code>log/debug</code> 25 处</td><td>交付版保留 <code>warn/error</code>，清掉 <code>log/debug</code></td></tr>
+      <tr><td><span class="tag t-p2">P2-3</span></td><td><b>版本注释堆积</b>：122 处历史注释，<code>V6.2.1</code> 出现 26 次、<code>V5.1.0</code> 19 次、<code>V4.9.11</code> 18 次</td><td>与"更新日志精简"的既定偏好一致：把"改了什么"迁到 <code>工作记录</code>，正文只留"为什么这么写"</td></tr>
+      <tr><td><span class="tag t-p2">P2-4</span></td><td><b>风格断层</b>：<code>var</code> 228 处 vs <code>const/let</code> 689+ 处；箭头函数 462、模板字符串 212</td><td>V4 之前用 <code>var</code>、V6 用 <code>let/const</code>。不影响运行，只需新代码统一</td></tr>
+      <tr><td><span class="tag t-p2">P2-5</span></td><td><b>交付目录卫生</b>：工作目录含 <b>100+ 个 <code>_</code> 前缀临时文件</b>、多个 <code>v6.4.17</code> 重复副本、<code>_废弃_坏版/</code> 目录</td><td>提交前归档到 <code>_archive/</code>，根目录只留最终 <code>.html</code> + 工作记录 + 审计报告，避免误交</td></tr>
+      <tr><td><span class="tag t-p3">P3-1</span></td><td><b>注释与实现不符</b>：L4226 写"11 段音频 体积 ~4.18 MB"，实测解码 <b>2.40 MB</b></td><td>修正注释，避免后续按错误数字做体积预算</td></tr>
+      <tr><td><span class="tag t-p3">P3-2</span></td><td><b>可删的兼容别名</b>：L2970 <code>function kmapEsc(s){ return escHtml(s); }</code>，注释自述"保留以免遗漏调用点"</td><td>全量替换后删除，减少一层无意义跳转</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 七 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">07</span>修复路线图</h2>
+
+  <div class="card">
+    <h3>v6.4.27 · 消肿与去漂移（P0）</h3>
+    <ul class="list">
+      <li>确定唯一 three.js 构建，重出 6 个子页，加 <code>THREE_BUILD</code> 断言 → P0-1</li>
+      <li>五份重复库合并共享（父页 1 份 + blob URL）→ P0-2，预期 −1.08 MB</li>
+      <li>修正 L11538 / L4226 两处失真注释 → P3-1</li>
+      <li>交付目录归档清理 → P2-5</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>v6.5 · 技术债清账（P1）</h3>
+    <ul class="list">
+      <li>62 处空 catch 加 <code>console.warn</code> → P1-2</li>
+      <li>innerHTML 拼装点全量过 <code>escHtml</code>（先查判卷回显 + 诊断报告）→ P1-3</li>
+      <li>移除 <code>runE2E</code> 或改为显式开关 → P1-4</li>
+      <li>postMessage 接收端改校验 <code>e.source</code> → P1-5</li>
+      <li>子页 iframe 加 <code>sandbox</code> → P1-6</li>
+      <li>blob URL 回收 + 监听器改 <code>AbortController</code> → P1-7</li>
+      <li>音频降码率（音质对比后定档）→ 体积二次优化</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>v6.6 · 可维护性</h3>
+    <ul class="list">
+      <li>主脚本 IIFE 包裹 → P2-1</li>
+      <li>console 清理 → P2-2；注释瘦身 → P2-3</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 附录 ===== -->
+<div class="sec">
+  <h2 class="sec-title"><span class="n">08</span>附录 · 审查指标汇总</h2>
+  <div class="data">
+    <table>
+      <tr><th>指标</th><th>值</th><th>评价</th></tr>
+      <tr><td>文件体积 / 行数</td><td class="num">8.37 MB / 11,902 行</td><td><span class="tag t-p1">偏大</span></td></tr>
+      <tr><td><code>&lt;script&gt;</code> 块</td><td class="num">16</td><td>结构清晰</td></tr>
+      <tr><td><code>node --check</code></td><td class="num">16 / 16 通过</td><td><span class="tag t-ok">无语法错误</span></td></tr>
+      <tr><td>裸 <code>&lt;/script&gt;</code> 提前截断</td><td class="num">0</td><td><span class="tag t-ok">转义正确</span></td></tr>
+      <tr><td>硬编码 API Key / Bearer</td><td class="num">0</td><td><span class="tag t-ok">无泄露</span></td></tr>
+      <tr><td><code>eval()</code> / <code>document.write()</code></td><td class="num">0 / 0</td><td><span class="tag t-ok">干净</span></td></tr>
+      <tr><td><code>new Function()</code></td><td class="num">18</td><td><span class="tag t-ok">均在压缩库内</span></td></tr>
+      <tr><td><code>innerHTML =</code></td><td class="num">102</td><td><span class="tag t-p1">需补 escHtml</span></td></tr>
+      <tr><td>空 <code>catch(e){}</code></td><td class="num">62</td><td><span class="tag t-p1">静默吞异常</span></td></tr>
+      <tr><td>add / removeEventListener</td><td class="num">137 : 0</td><td><span class="tag t-p1">不对称</span></td></tr>
+      <tr><td>localStorage 键</td><td class="num">5 个</td><td><span class="tag t-ok">前缀统一</span></td></tr>
+      <tr><td>版本号单一来源</td><td class="num">BUILD = v6.4.26</td><td><span class="tag t-ok">无旧号残留</span></td></tr>
+      <tr><td>重复函数名</td><td class="num">385</td><td><span class="tag t-ok">绝大多数来自压缩库</span></td></tr>
+      <tr><td>兜底机制</td><td class="num">V4.9.1 + 15s</td><td><span class="tag t-ok">优秀</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <p style="margin:0">代码审计报告 · 光学交互实验室 AI v6.4.26</p>
+  <p style="margin:4px 0 0">2026-09-21 · 无锡人工智能教育大赛 · 初中物理光学虚拟实验室</p>
+</div>
+
+</div>
+</body>
+</html>

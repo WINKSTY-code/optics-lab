@@ -1,0 +1,104 @@
+
+[A] http 通道  http://127.0.0.1:8793/光学交互实验室_AI_v6.1.0.html
+  OK   版本角标 = v6.1.0
+  OK   3D 挂载层就绪
+  OK   顶部实验标签仍为 11 个
+  OK   三处 2D/3D 切换条
+  OK   三处 3D 框
+  OK   初始三处 iframe 均未注入源码（懒挂载）
+
+[refl]
+  OK   已切到面板 tab-reflect
+  OK   切换条悬浮在 2D 画布内（右下角）   << 距右 12px 距下 10px
+  OK   切换条位于画布下半部（右下角，不是右上角）   << {'inside': True, 'right': 12, 'botGap': 10, 'inLowerHalf': True, 'btns': ['2D', '3D'], 'fs': True}
+  OK   切换条为 2D ｜ 3D 两态（另含全屏键）   << {'inside': True, 'right': 12, 'botGap': 10, 'inLowerHalf': True, 'btns': ['2D', '3D'], 'fs': True}
+  OK   3D 打开：2D 画布让位，3D 框显示   << {'frame': True, 'cv': 'none', 'srcdoc': True, 'press': ['false', 'true']}
+  OK   已注入 3D 源码且按钮态正确   << ['false', 'true']
+  OK   找到 3D 子文档
+  OK   子场景 three.js 就绪   << r147
+  OK   WebGL 可用且画布已铺开   << live 942x547
+  OK   场景对象与读数卡均就绪   << {'three': '147', 'gl': 'live', 'w': 942, 'h': 547, 'rows': 5, 'labels': 9, 'objs': 17}
+  OK   父页滑块驱动 3D（refl-iSlider → 65°）   << 65°
+  OK   3D 内改入射角 → 回写父页滑块 = 28   << 28
+  OK   3D 读数同步 28°   << 28°
+  OK   3D 模式下拖动滑块仍精确记录 1 行   << 1
+  OK   3D 态下全屏按钮可见
+  OK   3D 可进入原生全屏（且全屏元素确实是 3D 框）   << {'live': True, 'barH': 56, 'native': True, 'mine': 's3d-frame is-live'}
+  OK   全屏时顶部「退出全屏」工具条可见   << 56
+  OK   点「退出全屏」已退出
+  OK   切回 2D 后全屏按钮已隐藏
+  OK   切回 2D：画布恢复、3D 框收起   << {'frame': True, 'cv': 'block'}
+
+[lens]
+  OK   已切到面板 tab-lens
+  OK   切换条悬浮在 2D 画布内（右下角）   << 距右 12px 距下 10px
+  OK   切换条位于画布下半部（右下角，不是右上角）   << {'inside': True, 'right': 12, 'botGap': 10, 'inLowerHalf': True, 'btns': ['2D', '3D'], 'fs': True}
+  OK   切换条为 2D ｜ 3D 两态（另含全屏键）   << {'inside': True, 'right': 12, 'botGap': 10, 'inLowerHalf': True, 'btns': ['2D', '3D'], 'fs': True}
+  OK   3D 打开：2D 画布让位，3D 框显示   << {'frame': True, 'cv': 'none', 'srcdoc': True, 'press': ['false', 'true']}
+  OK   已注入 3D 源码且按钮态正确   << ['false', 'true']
+  OK   找到 3D 子文档
+  OK   子场景 three.js 就绪   << r147
+  OK   WebGL 可用且画布已铺开   << live 942x547
+  OK   场景对象与读数卡均就绪   << {'three': '147', 'gl': 'live', 'w': 942, 'h': 547, 'rows': 7, 'labels': 9, 'objs': 32}
+  OK   父页滑块驱动 3D（lens-uSlider → 1.00 倍）   << 1.00 倍
+  OK   光锥是立体锥（有 z≠0 的光线），不是同一平面里的扇面   << z≠0 光束段 130
+  OK   3D 模式下拖动滑块仍精确记录 1 行   << 1
+  OK   3D 态下全屏按钮可见
+  OK   3D 可进入原生全屏（且全屏元素确实是 3D 框）   << {'live': True, 'barH': 56, 'native': True, 'mine': 's3d-frame is-live'}
+  OK   全屏时顶部「退出全屏」工具条可见   << 56
+  OK   点「退出全屏」已退出
+  OK   切回 2D 后全屏按钮已隐藏
+  OK   切回 2D：画布恢复、3D 框收起   << {'frame': True, 'cv': 'block'}
+
+[mirror]
+  OK   已切到面板 tab-mirror
+  OK   切换条悬浮在 2D 画布内（右下角）   << 距右 12px 距下 10px
+  OK   切换条位于画布下半部（右下角，不是右上角）   << {'inside': True, 'right': 12, 'botGap': 10, 'inLowerHalf': True, 'btns': ['2D', '3D'], 'fs': True}
+  OK   切换条为 2D ｜ 3D 两态（另含全屏键）   << {'inside': True, 'right': 12, 'botGap': 10, 'inLowerHalf': True, 'btns': ['2D', '3D'], 'fs': True}
+  OK   3D 打开：2D 画布让位，3D 框显示   << {'frame': True, 'cv': 'none', 'srcdoc': True, 'press': ['false', 'true']}
+  OK   已注入 3D 源码且按钮态正确   << ['false', 'true']
+  OK   找到 3D 子文档
+  OK   子场景 three.js 就绪   << r147
+  OK   WebGL 可用且画布已铺开   << live 942x547
+  OK   场景对象与读数卡均就绪   << {'three': '147', 'gl': 'live', 'w': 942, 'h': 547, 'rows': 8, 'labels': 11, 'objs': 10}
+  OK   父页滑块驱动 3D（mirr-uSlider → 20.0 cm）   << 20.0 cm
+  OK   3D 内左右移动棋子 → 物/像/B 同步（像跟着动）   << [0.3, 0.3, 0.3]
+  OK   读数卡显示左右位置   << 5.0 cm
+  OK   3D 模式下拖动滑块仍精确记录 1 行   << 1
+  OK   3D 态下全屏按钮可见
+  OK   3D 可进入原生全屏（且全屏元素确实是 3D 框）   << {'live': True, 'barH': 56, 'native': True, 'mine': 's3d-frame is-live'}
+  OK   全屏时顶部「退出全屏」工具条可见   << 56
+  OK   点「退出全屏」已退出
+  OK   切回 2D 后全屏按钮已隐藏
+  OK   切回 2D：画布恢复、3D 框收起   << {'frame': True, 'cv': 'block'}
+
+[回归]
+  OK   V5.2.0「日食与月食」3D 模式仍正常
+  OK   日食场景仍能加载（5 阶段）
+  OK   点实验室自带的「全屏」→ 整个页面进入全屏   << {'fe': True, 'isHtml': True}
+  OK   ★ 点实验名后网页全屏仍在（修复：不再误退 documentElement 全屏）   << {'fe': True, 'isHtml': True}
+  OK   再点一次「全屏」可正常退出
+  OK   11 个实验标签逐一切换均正常   << []
+  OK   三语下切换按钮文案   << {'zh': '3D', 'zht': '3D', 'en': '3D'}
+  OK   报告模块与记录器未受影响
+  OK   页面看门狗 __rbErrors 为空   << []
+  OK   未弹出启动失败浮层
+  OK   控制台无错误
+
+[B] file:// 通道（双击打开）
+      {'t': 'object', 'gl': 'live', 'rows': 8}
+  OK   file:// 下 3D 场景正常启动（离线双击可用）
+  OK   file:// 下看门狗无异常
+  OK   file:// 通道控制台无错误
+
+[C] 视口 × 字号复扫（切换条不越界、不压画布）
+     1280x800    0.8:in1 1.0:in1 1.4:in1
+     1440x900    0.8:in1 1.0:in1 1.4:in1
+     1920x1080   0.8:in1 1.0:in1 1.4:in1
+     1024x800    0.8:in1 1.0:in1 1.4:in1
+      768x1024   0.8:in1 1.0:in1 1.4:in1
+      390x844    0.8:in1 1.0:in1 1.4:in1
+  OK   所有视口 × 字号下切换条都在画布内、保持单行   << []
+
+==================================================================
+通过 80 项，失败 0 项

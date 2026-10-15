@@ -1,0 +1,21 @@
+{
+  "local": "自检_V695_新增claude-haiku-5.5.png",
+  "size": 82669,
+  "confirm_key": "f1de11938cfd0dc300065d5f30702794",
+  "task_id": "drivetask2_6bb200194bef4a668f9301253124b2b8",
+  "dir_id": "EwybDtkaywAY",
+  "file_name": "自检_V695_新增claude-haiku-5.5.png",
+  "ticket": {
+    "domain": "smhwb-gz-002.data-tencentsmh.com",
+    "path": "/smh2mf8nq7i9cemv/AAAAAAAAAAAAAAquGxmsFgjIGlOQUWYlf1de11938cfd0dc300065d5f30702794.png",
+    "headers": {
+      "Authorization": "q-ak=AKIDhSxf-NqnruMMO70MGTA3AYr9gC-VGVtkcpN04IdlYJRfaQq1P_y49q3xqHk4WKJg&q-header-list=host;x-cos-acl;x-cos-storage-class&q-key-time=1791513276;1791520476&q-sign-algorithm=sha1&q-sign-time=1791513276;1791520476&q-signature=a7de3f1e4984569c614376b1f71228049d572b72&q-url-param-list=",
+      "Cache-Control": "max-age=31104000",
+      "Content-Type": "image/png",
+      "x-cos-acl": "default",
+      "x-cos-crc32c-flag": "cosn",
+      "x-cos-security-token": "hn1Q6yutZY7CKE7pDM6BXzGA9lnepcaa61460cf4f8bf4d80c30477d341de4e434j_hqDszsxyOGY02E2VbVNIwIhEQHXoExI7017HWJT8732831IaNwBMaAKT_zr0zuuvZnnxQegHEFyCGGcqwbOvHPFM-qmRiny_JjsCCet1S7OPHzwqE9QVVLrehYwZY3TNVYYE3rdbJd4LfFE4kG0S6RhXvchqYYd1WuN01VVoFaxfTRorfhMFDNFwpEmpFi9XeoYhSJZMD43sZduo3Vjkuse0EYYiLhD0EqtCm0ydYtbqm223kX1EmIsYairvmPl0SnTfyee_4Hv6dYl_9nxcRhxlqj18bKNgPCfkcrQREC1Sw-mBk_j5QV01KevTP8oTrabru0whQH2ucYMyMIOo-sOFEDg03RXysBRnxeHD1RA1QFiBlcsvVfNHeOVZvXks_-ybLPieIhvvBLPCefX4pGizKOoG5XzC3Bw6rgrnKXLNCsfJ8HeZrpQFMloUBeQ6PAnwhkos3quttH1t2wLW_X8nQo3kfJ3_lSnkJRzCZOLU7p0HJFr79RjP4pJI9Lp-_aOOkvw7YHO1vHL35yJs2o60psI05vbotsyTQtiKIR7LeHxS7XgRS6Zs0XqqA9WgGCCwhSsZLF9xLZqxdAGdlK1-YlGjhpBAtXbmbeckeuqRmjDswNUp0p8FIj_ixuCbnX_ZBlwOnh4lM1yPx_oZ_rpahRP0EzN2LDa9oqH-ASgBewurzMfK7ymm27oUrOoIOCFBDJLHDBAUVobLrr_iE2pKlceM4FeVZ1T4xNcjDi64gCYTZIVqUgbKKRbGjsMo2ojvi5-OsF0Z8fk_gbR6AlwJ7qxi1YY3uZB3fz7i-FESNCCGw-eM3mrlGfCTJibWvshiqf6AeBqftldXGQKDCSII0dPa1mIDP6UPbpMkqm8H8f0hv80sp_Ts0UcHH8wl87XmUlaDpcE-8tq-W-wBXHrZcvafOCVUpp9v0WnlUTkjW3_cz_IFNcBkeRngJ",
+      "x-cos-storage-class": "INTELLIGENT_TIERING"
+    }
+  }
+}
